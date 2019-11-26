@@ -28,6 +28,7 @@ $projects = $projectsRepository->getAll();
                         <td>Created At</td>
                         <td>Updated At</td>
                         <td></td>
+                        <td></td>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,6 +41,9 @@ $projects = $projectsRepository->getAll();
                             <td><?=$project->updatedAt?></td>
                             <td>
                                 <a href="edit_project.php?project_id=<?=$project->id?>">edit</a>
+                            </td>
+                            <td>
+                                <a href="delete_project.php?project_id=<?=$project->id?>">Delete</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

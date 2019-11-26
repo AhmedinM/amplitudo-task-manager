@@ -21,7 +21,7 @@ class ProjectsRepository
                 $row['name'],
                 $row['description'],
                 $row['created_at'],
-                $row['updated_at'],
+                $row['updated_at']
             );
         }
         
@@ -47,7 +47,7 @@ class ProjectsRepository
             $row['name'],
             $row['description'],
             $row['created_at'],
-            $row['updated_at'],
+            $row['updated_at']
         );
     }
 
@@ -82,5 +82,13 @@ class ProjectsRepository
         $result = $this->db->query($sql);
         if($result === FALSE)
             die($this->db->error);
+    }
+
+    public function delete($project){
+        $sql = "DELETE FROM projects WHERE id = {$project->id}";
+        $result = $this->db->query($sql);
+        if($result === FALSE){
+            die($this->db->error);
+        }
     }
 }
