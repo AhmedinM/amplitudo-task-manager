@@ -40,7 +40,8 @@ $projects = $projectsRepository->getAll();
                             <td><?=$project->createdAt?></td>
                             <td><?=$project->updatedAt?></td>
                             <td>
-                                <a href="edit_project.php?project_id=<?=$project->id?>">edit</a>
+                                <a href="edit_project.php?project_id=<?=$project->id?>">Edit</a>
+                                <a href="project_details.php?id=<?=$project->id?>">Open</a>
                             </td>
                             <td>
                                 <a href="delete_project.php?project_id=<?=$project->id?>">Delete</a>
