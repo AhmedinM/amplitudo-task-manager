@@ -26,7 +26,7 @@ class TasksRepository{
             $task->userId = intval($row["user_id"]);
             $task->createdAt = $row["task_created_at"];
             $task->updatedAt = $row["task_updated_at"];
-            $task->user = new User();
+            $task->user = new User(NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
             $task->user->id = $row['user_id'];
             $task->user->firstName = $row['first_name'];
             $task->user->lastName = $row['last_name'];

@@ -1,6 +1,8 @@
 <?php
 
 require_once "../database.php";
+require_once "../projects/projects_repository.php";
+require_once "../users_repository.php";
 
 session_start();
 
@@ -12,29 +14,10 @@ if(isset($_SESSION["errors"])) {
     unset($_SESSION["errors"]);
     unset($_SESSION["old"]);
 }
-
-$sql1 = "SELECT * FROM projects";
-$sql2 = "SELECT * FROM users";
-$arr1 = [];
-$arr2 = [];
-
-$result1 = $dbConnection->query($sql1);
-if($result1===false){
-    $arr1[] = "Database error";
-}else{
-    while($row1 = $result1->fetch_assoc()){
-        $arr1[] = $row1;
-    }
-}
-
-$result2 = $dbConnection->query($sql2);
-if($result2===false){
-    $arr2[] = "Database error";
-}else{
-    while($row2 = $result2->fetch_assoc()){
-        $arr2[] = $row2;
-    }
-}
+$projectRepository = new ProjectRepository($dbConnection);
+$userRepository = new UsersRepository($dbConnection);
+$arr1 = $projectRepository->getAll();
+$arr2 = $userRepository->getAll();
 
 ?>
 
@@ -71,11 +54,11 @@ if($result2===false){
                     <label for="projectInput">Project</label> <br>
                     <select name="project" id="projectInput">
                         <?php
-                            if($arr1[0] === "Database error"){
-                                echo "<option value=\"0\">".$arr1[0]."</option>";
+                            if($arr1 === NULL){
+                                echo "<option value=\"0\">Database error</option>";
                             }else{
                                 foreach($arr1 as $arr){
-                                    echo "<option value=\"".$arr["id"]."\">".$arr["name"]."</option>";
+                                    echo "<option value=\"".$arr->id."\">".$arr->name."</option>";
                                 }
                             }
                         ?>
@@ -92,11 +75,11 @@ if($result2===false){
                     <label for="userInut">User</label> <br>
                     <select name="user" id="userInput">
                         <?php
-                            if($arr2[0] === "Database error"){
-                                echo "<option value=\"0\">".$arr2[0]."</option>";
+                            if($arr2 === NULL){
+                                echo "<option value=\"0\">Database error</option>";
                             }else{
                                 foreach($arr2 as $arr){
-                                    echo "<option value=\"".$arr["id"]."\">".$arr["first_name"]." ".$arr["last_name"]."</option>";
+                                    echo "<option value=\"".$arr->id."\">".$arr->firstName." ".$arr->lastName."</option>";
                                 }
                             }
                         ?>

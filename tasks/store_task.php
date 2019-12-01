@@ -69,10 +69,6 @@ if(!$isValid) {
 
 $taskRepository = new TasksRepository($dbConnection);
 
-$sqlP = "SELECT * FROM users WHERE id = ".intval($_POST["user"]);
-$resultP = $dbConnection->query($sqlP);
-$row = $resultP->fetch_assoc();
-
 $task = new Task();
 $task->id = NULL;
 $task->name = $_POST["title"];
