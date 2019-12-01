@@ -3,7 +3,14 @@
 require_once "../database.php";
 require_once "projects_repository.php";
 
-$projectsRepository = new ProjectsRepository($dbConnection);
+session_start();
+$newTask = NULL;
+if(isset($_SESSION["newTask"])){
+    $newTask = $_SESSION["newTask"];
+    unset($_SESSION["newTask"]);
+}
+
+$projectsRepository = new ProjectRepository($dbConnection);
 $projects = $projectsRepository->getAll();
 
 ?>
@@ -19,6 +26,11 @@ $projects = $projectsRepository->getAll();
         </div>
         <br>
         <div>
+            <?php
+                if($newTask!==NULL){
+                    echo "<span style=\"color: green\">".$newTask."</span><br/><br/>";
+                }
+            ?>
             <table border="1">
                 <thead>
                     <tr>

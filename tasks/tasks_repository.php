@@ -11,13 +11,13 @@ class TasksRepository{
     }
 
     public function getTasksForProject($projectId){
-        $sql = "SELECT *, tasks.id as task_id, users.id as user_id, tasks.created_at as task_created_at, tasks.updated_at as task_updated_at, users.created_at as user_created_at, users.updated_at as user_updated_at FROM tasks LEFT JOIN users ON users.id = tasks.user_id WHERE project_id = 1";
+        $sql = "SELECT *, tasks.id as task_id, users.id as `user_id`, tasks.created_at as task_created_at, tasks.updated_at as task_updated_at, users.created_at as user_created_at, users.updated_at as user_updated_at FROM tasks LEFT JOIN users ON users.id = tasks.user_id WHERE project_id = ".$projectId;
         $result = $this->db->query($sql);
-        if($result===false){
+        if($result === FALSE) {
             die($this->db->error);
         }
         $tasks = [];
-        while($row = $result->fetch_assoc()){
+        while($row = $result->fetch_assoc()) {
             $task = new Task();
             $task->id = intval($row["task_id"]);
             $task->name = $row["title"];
@@ -38,5 +38,13 @@ class TasksRepository{
             $tasks[] = $task;
         }
         return $tasks;
+    }
+
+    public function add($task){
+        $sql = "INSERT INTO tasks VALUES(NULL,'{$task->name}','{$task->description}',$task->projectId,$task->userId,'{$task->createdAt}','{$task->updatedAt}')";
+        $result= $this->db->query($sql);
+        if($result===false){
+            die($this->db->error);
+        }
     }
 }

@@ -60,8 +60,7 @@ $tasks = $tasksRepository->getTasksForProject($projectId);
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
-
-            </ul>
         </div>
+        <a href="../tasks/create_task.php">New Task</a>
     </body>
 </html>

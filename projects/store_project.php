@@ -51,7 +51,7 @@ $project = new Project(
     $_POST["name"],
     $_POST["description"],
     date('Y-m-d H:i:s'),
-    date('Y-m-d H:i:s'),
+    date('Y-m-d H:i:s')
 );
 
 $projectsRepository->add($project);
