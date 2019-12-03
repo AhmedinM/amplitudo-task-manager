@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <title>CSS</title>
+        <style>
+            body{
+                background-color: #06831bce;
+                color: orange;
+            }
+
+            label{
+                color: rgba(111, 13, 145, 0.3); /*rgba daje trasparentnost boji*/
+            }
+
+            p > label{  /*sa > uzima samo direktnu djecu*/
+                color: red;
+            }
+
+            div{
+                height: 300px;
+            }
+            body:nth-child(){
+                background-color: lightblue;
+            }
+
+            /* h1 { font-size: 12pt; } 
+             h2 { font-size: 12pt; } 
+             body>label { font-size: 12pt; } */
+
+             h1, h2, body > label {
+                font-size: 12pt;
+            }
+        </style>
+    </head>
+    <body>
+        <label>Test</label>
+        <p>Hello World! <label>Label 2</label></p>
+        <div></div>
+        <div></div>
+        <div></div>
+    </body>
+</html>
