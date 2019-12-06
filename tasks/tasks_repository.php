@@ -35,16 +35,46 @@ class TasksRepository{
             $task->user->gender = $row['gender'];
             $task->user->createdAt = $row['user_created_at'];
             $task->user->updatedAt = $row['user_updated_at'];
+            $task->isCompleted = $row['is_completed'];
             $tasks[] = $task;
         }
         return $tasks;
     }
 
     public function add($task){
-        $sql = "INSERT INTO tasks VALUES(NULL,'{$task->name}','{$task->description}',$task->projectId,$task->userId,'{$task->createdAt}','{$task->updatedAt}')";
+        $sql = "INSERT INTO tasks VALUES(NULL,'{$task->name}','{$task->description}',$task->projectId,$task->userId,'{$task->createdAt}','{$task->updatedAt}',0)";
         $result= $this->db->query($sql);
+        echo $sql;
         if($result===false){
             die($this->db->error);
         }
+    }
+
+    public function update($task){
+        $sql = "UPDATE tasks SET "
+                ."is_completed = {$task->isCompleted} "
+                ."WHERE id = {$task->id}";
+        $result = $this->db->query($sql);
+        if($result===false){
+            die($this->db->error);
+        }
+    }
+
+    public function find($id){
+        $sql = "SELECT * FROM tasks WHERE id = $id";
+        $result = $this->db->query($sql);
+        $row = $result->fetch_assoc();
+
+        $task = new Task();
+        $task->id = intval($row["id"]);
+        $task->name = $row["title"];
+        $task->description = $row["description"];
+        $task->projectId = intval($row["project_id"]);
+        $task->userId = intval($row["user_id"]);
+        $task->createdAt = $row["created_at"];
+        $task->updatedAt = $row["updated_at"];
+        $task->isCompleted = $row["is_completed"];
+
+        return $task;
     }
 }

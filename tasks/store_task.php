@@ -77,6 +77,7 @@ $task->projectId = intval($_POST["project"]);
 $task->userId = intval($_POST["user"]);
 $task->createdAt = date('Y-m-d H:i:s');
 $task->updatedAt = date('Y-m-d H:i:s');
+$task->isCompleted = 0;
 
 $taskRepository->add($task);
 

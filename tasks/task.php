@@ -9,4 +9,5 @@ class Task{
     public $createdAt;
     public $updatedAt;
     public $user;
+    public $isCompleted;
 }
