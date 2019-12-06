@@ -22,3 +22,4 @@ $task->isCompleted = 1;
 $tasksRepository->update($task);
 
 header("Location: ../projects/project_details.php?id=$projectId");
+//
