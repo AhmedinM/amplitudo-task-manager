@@ -2,7 +2,7 @@
 
 require_once "../database.php";
 require_once "../projects/projects_repository.php";
-require_once "../users_repository.php";
+require_once "../users/users_repository.php";
 
 session_start();
 
