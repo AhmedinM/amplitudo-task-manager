@@ -1,5 +1,11 @@
 <?php
 session_start();
+
+if(!isset($_SESSION["loged"]) || $_SESSION["loged"]!==true){
+    header("Location: ../login.php");
+    exit;
+}
+
 $errors = [];
 $old = [];
 if(isset($_SESSION["errors"])) {

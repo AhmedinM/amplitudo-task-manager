@@ -4,6 +4,13 @@ require_once "../database.php";
 require_once "projects_repository.php";
 require_once "project.php";
 
+session_start();
+
+if(!isset($_SESSION["loged"]) || $_SESSION["loged"]!==true){
+    header("Location: ../login.php");
+    exit;
+}
+
 $projectsRepository = new ProjectsRepository($dbConnection);
 $project = $projectsRepository->find($_GET["project_id"]);
 

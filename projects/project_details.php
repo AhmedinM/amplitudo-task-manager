@@ -10,6 +10,12 @@ require_once "../tasks/tasks_repository.php";
 //$per_page = $_GET['per_page'];
 //$offset = ($page - 1)*$per_page;
 //$sql = "SELECT * FROM tasks LIMIT $per_page OFFSET $offset";
+session_start();
+
+if(!isset($_SESSION["loged"]) || $_SESSION["loged"]!==true){
+    header("Location: ../login.php");
+    exit;
+}
 
 if(!isset($_GET["id"])){
     http_response_code(400);
