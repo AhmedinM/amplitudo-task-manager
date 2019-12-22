@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 15, 2019 at 12:20 AM
+-- Generation Time: Dec 22, 2019 at 07:22 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.2.15
 
@@ -67,7 +67,8 @@ INSERT INTO `projects` (`id`, `name`, `description`, `created_at`, `updated_at`)
 (2, 'Project 2', 'Description of second project.', '2019-11-20 18:24:18', '2019-11-20 18:24:18'),
 (3, 'Project 3', 'This is description of Project 3.', '2019-11-20 18:24:46', '2019-11-20 18:24:46'),
 (4, 'Novi projekat', 'Bla bla bla', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(5, 'Novi projekat 2 - update verzija', 'Nista - novo', '2019-11-25 17:45:12', '2019-11-25 18:55:28');
+(5, 'Novi projekat 2 - update verzija', 'Nista - novo', '2019-11-25 17:45:12', '2019-11-25 18:55:28'),
+(27, 'ssddscdscdsc', 'dscsdcsdc dscdscd dscdscasd cdssacsdacsdc', '2019-12-20 23:51:11', '2019-12-20 23:51:11');
 
 -- --------------------------------------------------------
 
@@ -124,7 +125,19 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `birt
 (1, 'Lazar', 'Radinovic', 'lazar@test.com', '5ebe2294ecd0e0f08eab7690d2a6ee69', '1993-11-20', 'male', '2019-11-18 17:37:25', '2019-11-18 17:37:25'),
 (4, 'Marko', 'Markovic', 'marko@test.com', '202cb962ac59075b964b07152d234b70', '2019-11-21', 'male', '2019-11-20 18:25:36', '2019-11-20 18:25:36'),
 (5, 'Petar', 'Petrovic', 'petar@test.com', '202cb962ac59075b964b07152d234b70', '2019-11-08', 'male', '2019-11-20 18:26:03', '2019-11-20 18:26:03'),
-(6, 'Milena', 'Milenovic', 'milena@test.com', '202cb962ac59075b964b07152d234b70', '2019-11-05', 'female', '2019-11-20 18:26:27', '2019-11-20 18:26:27');
+(6, 'Milena', 'Milenovic', 'milena@test.com', '202cb962ac59075b964b07152d234b70', '2019-11-05', 'female', '2019-11-20 18:26:27', '2019-11-20 18:26:27'),
+(7, 'Korisnik', 'Prvi', 'korisnik@test.com', 'df5e8c760f430ff37c1384098bd7e806', '2019-12-10', 'male', '2019-12-16 15:35:46', '2019-12-16 15:35:46');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_project`
+--
+
+CREATE TABLE `user_project` (
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `project_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indexes for dumped tables
@@ -159,6 +172,13 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `email` (`email`);
 
 --
+-- Indexes for table `user_project`
+--
+ALTER TABLE `user_project`
+  ADD PRIMARY KEY (`user_id`,`project_id`),
+  ADD KEY `project_id` (`project_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -172,7 +192,7 @@ ALTER TABLE `addresses`
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `tasks`
@@ -184,7 +204,7 @@ ALTER TABLE `tasks`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
@@ -202,6 +222,13 @@ ALTER TABLE `addresses`
 ALTER TABLE `tasks`
   ADD CONSTRAINT `tasks_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `tasks_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `user_project`
+--
+ALTER TABLE `user_project`
+  ADD CONSTRAINT `user_project_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `user_project_ibfk_2` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
