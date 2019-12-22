@@ -13,8 +13,6 @@ function userProject($projectId,$arr){
         if($result===false){
             die($this->dbConnection->error);
         }
-        header("Location: ../users/user.php");
-        exit;
     }
     return;
 }

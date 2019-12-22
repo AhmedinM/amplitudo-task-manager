@@ -135,7 +135,6 @@ $projects = $projectsRepository->getAll();
                     $("#launch2").click(function() {
                         $("#createProjectForm").modal('show');
                     });
-
                     xmlhttp = new XMLHttpRequest();
                         xmlhttp.onreadystatechange = function() {
                             if (this.readyState == 4 && this.status == 200) {
@@ -163,11 +162,11 @@ $projects = $projectsRepository->getAll();
                     let data = {
                         name: nameInput.val(),
                         description: descriptionInput.val()
-                        //users: arr
                     };
                     $.post("store_project.php", data, function(response) {
                         console.log(response);
-                        window.location = "project_details.php?id=" + response.id;
+                        //let i = 2;
+                        //window.location = "project_details.php?id=" + response.id;
                     }).fail(function(res) {
                         if(res.status == 422) {
                             if(res.responseJSON.name) {
