@@ -8,6 +8,7 @@ session_start();
 require_once "../database.php";
 require_once "project.php";
 require_once "projects_repository.php";
+require_once "../user_project.php";
 
 $errors = [];
 $isValid = true;
@@ -35,14 +36,26 @@ if(isset($_POST["description"])) {
     }
 }
 
+$users;
+if(isset($_POST["users"])){
+    for($i=0;$i<count($_POST["users"]);$i++){
+        $users[$i] = $_POST["users"][$i];
+    }
+}
+
 if(!$isValid) {
-    $_SESSION["old"] = $_POST;
+    /*$_SESSION["old"] = $_POST;
     $_SESSION["errors"] = $errors;
-    header("Location: create_project.php");
+    header("Location: create_project.php");*/
+    http_response_code(422);
+    header("Content-Type: application/json");
+    echo json_encode($errors);
     exit;
 }
 
-$projectsRepository = new ProjectsRepository($dbConnection);
+echo "Ovo je: ".$users[0];
+
+$projectsRepository = new ProjectRepository($dbConnection);
 
 // 2019-11-25 17:34:14
 // yyyy-MM-dd HH:mm:ss
@@ -55,6 +68,13 @@ $project = new Project(
 );
 
 $projectsRepository->add($project);
+//die($project->id);
+//$project->id = 1;
 
-header("Location: projects.php");
+//header("Location: projects.php");
 
+userProject($project->id,$users);
+
+http_response_code(201);
+header("Content-Type: application/json");
+echo json_encode(["id" => $project->id]);

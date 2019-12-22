@@ -31,7 +31,11 @@ class ProjectRepository{
         $sql = "INSERT INTO projects VALUES(NULL,'{$project->name}','{$project->description}','{$project->createdAt}','{$project->updatedAt}')";  //datum takodje u stringu
         $this->db->query($sql);
 
-        $project->id = $this->db->insert_id;
+        $project->id = $this->db->insert_id();
+        echo($project->id);
+        
+        $project->id = 2; //proba
+        exit;
     }
 
     public function update($project){
