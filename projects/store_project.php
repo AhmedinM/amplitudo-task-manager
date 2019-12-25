@@ -32,9 +32,10 @@ if(isset($_POST["description"])) {
 }
 $users;
 if(isset($_POST["users"])){
-    for($i=0;$i<count($_POST["users"]);$i++){
+    /*for($i=0;$i<count($_POST["users"]);$i++){
         $users[$i] = $_POST["users"][$i];
-    }
+    }*/
+    $users = $_POST["users"];
 }
 if(!$isValid) {
     /*$_SESSION["old"] = $_POST;
@@ -59,7 +60,13 @@ $projectsRepository->add($project);
 //die($project->id);
 //$project->id = 1;
 //header("Location: projects.php");
-userProject($project->id,$users);
+/*$id = $_SESSION["pojectId"];
+unset($_SESSION["pojectId"]);*/
+if(isset($users)){
+    userProject($project->id,$users);
+}
+//echo "moze";
+
 http_response_code(201);
 header("Content-Type: application/json");
 echo json_encode(["id" => $project->id]);

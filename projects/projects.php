@@ -161,13 +161,15 @@ $projects = $projectsRepository->getAll();
                     //console.log(arr[0]);
                     let data = {
                         name: nameInput.val(),
-                        description: descriptionInput.val()
+                        description: descriptionInput.val(),
+                        users: arr
                     };
                     $.post("store_project.php", data, function(response) {
                         console.log(response);
                         //let i = 2;
-                        //window.location = "project_details.php?id=" + response.id;
+                        window.location = "project_details.php?id=" + response.id;
                     }).fail(function(res) {
+                        console.log(res);
                         if(res.status == 422) {
                             if(res.responseJSON.name) {
                                 $("#nameErrorPlaceholder").text(res.responseJSON.name[0]);

@@ -1,5 +1,7 @@
 <?php
 //repozitorijum - skup klasa za izvlacenje podataka
+//session_start();
+
 require_once "project.php";
 class ProjectRepository{
     private $db;    //ne treba da pravi konekciju sa bazom
@@ -29,6 +31,7 @@ class ProjectRepository{
             exit;
         }
         $project->id = $this->db->insert_id;
+        //$_SESSION["projectId"] = $this->db->insert_id;
     }
     public function update($project){
         $project->updated_at = date('Y-m-d H:i:s');
