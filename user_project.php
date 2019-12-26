@@ -15,7 +15,7 @@ $databaseName = "kurs";
 $dbConnection = new mysqli($host, $username, $password, $databaseName);
 
         //
-        $sql = "INSERT INTO user_project (`user_id`, `project_id`)VALUES($projectId, $a)";
+        $sql = "INSERT INTO user_project (`user_id`, `project_id`)VALUES($a,$projectId)";
         $result = $dbConnection->query($sql);
         if($result===false){
             die($dbConnection->error);
